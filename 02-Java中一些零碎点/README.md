@@ -1,0 +1,1 @@
+[java获取系统变量](https://blog.csdn.net/weixin_37139197/article/details/78877766)
