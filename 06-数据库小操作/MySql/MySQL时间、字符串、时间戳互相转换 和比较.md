@@ -1,6 +1,11 @@
 # MySQL时间、字符串、时间戳互相转换
 
-转换
+Mysql取系统函数：
+- Select curtime();
+- Select curdate():
+- Select sysdate():
+- select now();
+
 
 ```
 1 时间转字符串

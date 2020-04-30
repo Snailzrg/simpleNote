@@ -114,3 +114,10 @@ select * from students procedure analyse(16,256);
 
 
 ## 补充
+
+**PS：mysql general log日志清除技巧**
+mysql general log日志不能直接删除，间接方法
+USE mysql;
+CREATE TABLE gn2 LIKE general_log;
+RENAME TABLE general_log TO oldLogs, gn2 TO general_log;**
+
