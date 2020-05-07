@@ -22,3 +22,9 @@ idea 调试对象字段显示不全问题
  
  ## 配置LOMBACK
 - [SEE](https://blog.csdn.net/qq_41441210/article/details/79891093)
+
+
+
+## IDEA debug
+[see](https://www.cnblogs.com/chiangchou/p/idea-debug.html)
+右键断点 输入条件
