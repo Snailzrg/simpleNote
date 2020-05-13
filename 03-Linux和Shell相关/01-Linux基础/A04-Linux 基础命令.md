@@ -27,12 +27,57 @@ ll ： ls -l 的别名，有些 linux 中没有这个命令
 创建目录
 mkdir -p 目录 ：父级目录不存在时创建父级目录
 ```
-
++ tail
+```
+显示文件最后的内容
+tail -n 10 log ：显示log文件最后10行内容
+tail -f log ：追踪log文件内容，默认会显示最后10行
+tail -f -n 100 log ：追踪log文件内容，并显示最后100行内容
+```
++ less
+ ```
+按照命令窗口大小友好显示文件内容
+q ：退出 less 命令显示内容
+```
++ rm (慎用)
+```
+删除命令
+rm -f ./log ： 删除当前目录中log文件
+rm -rf ./dir ： 递归删除当前目录中的dir文件夹
+```
++ mv
+```
+移动文件/重命名
+mv ./log ../ ： 将当前log文件移动上一级文件夹中去
+mv log logRename ：将当前log文件重命名为logRename
+```
++ cp
+```
+复制命令
+cp -r hello ../ ： 将hello文件夹复制到上一级目录
+```
 
 ## 权限 chmod
+- 赋权
+```
+1 ： r ，读权限
+2 ： w ，写权限
+4 ： x ，可执行权限
+```
+- linux 权限
+```
+| 文件 | 属主 | 属组 | 其他用户 |
+| 类型 | 权限 | 权限 | 权限 |
+|  d  | rwx  | rwx  | rwx |  d：表示文件夹
+```
 
-
-
+- eg：
+```
+chomd +x eg.sh ：赋予 eg.sh 文件所有用户可执行权限
+chmod 777 eg.sh ：赋予 eg.sh 文件所有用户所用权限
+chown ---> 修改文件/文件夹属组和属主
+chown -R mysql:mysql database
+```
 
 ## 网络相关
 
@@ -110,4 +155,10 @@ systemctl enable iptables.service #开机启动
 </zone> 
 ```
 
-## ssh
+## SSH
+
+
+
+
+
+## 定时任务
