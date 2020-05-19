@@ -18,7 +18,7 @@ export JAVA_HOME=/data/soft/jdk1.8
 export PATH=$PATH:$JAVA_HOME/bin
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
- source /etc/profile 生效
+source /etc/profile 生效
  
  
  # maven 配置
