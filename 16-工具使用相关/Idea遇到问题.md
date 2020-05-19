@@ -29,3 +29,10 @@ idea 调试对象字段显示不全问题
 [see](https://www.cnblogs.com/chiangchou/p/idea-debug.html)
 右键断点 输入条件
 
+
+
+## IDEA2019 插件太慢
+
+
+
+
