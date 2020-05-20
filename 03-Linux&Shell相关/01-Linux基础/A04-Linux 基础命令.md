@@ -128,6 +128,11 @@ systemctl stop firewalld.service #停止
 systemctl disable firewalld.service #禁止开机启动 
 systemctl restart iptables.service #开启 
 systemctl enable iptables.service #开机启动
+
+
+
+--------->
+
 ```
 + 使用 firewall-cmd 添加规则
  ```

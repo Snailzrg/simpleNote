@@ -37,3 +37,6 @@ export PATH=$PATH:$M2_HOME/bin
 
 
 
+
+
+#ngnix 配置
