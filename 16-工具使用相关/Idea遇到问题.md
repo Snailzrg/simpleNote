@@ -22,3 +22,12 @@ idea 调试对象字段显示不全问题
  
  ## 配置LOMBACK
 - [SEE](https://blog.csdn.net/qq_41441210/article/details/79891093)
+
+
+##idea 插件 
+- go
+- mogo plugin
+- lombok 
+- maven helper
+- rest client plugin
+- alibaba java coding guideling
