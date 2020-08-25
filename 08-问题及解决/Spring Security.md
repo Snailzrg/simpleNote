@@ -59,7 +59,6 @@ public class SecurityContextPersistenceFilter extends GenericFilterBean {
 		}
 	}
 }
-复制代码
 ```
 
 原本的方法很长，我这里列出来了比较关键的几个部分：
@@ -123,7 +122,6 @@ public List<Menu> getMenusByHrId() {
 public void configure(WebSecurity web) throws Exception {
     web.ignoring().antMatchers("/css/**","/js/**","/index.html","/img/**","/fonts/**","/favicon.ico","/verifyCode");
 }
-复制代码
 ```
 
 正常这样配置是没有问题的。
