@@ -28,14 +28,14 @@ Collections.sort(personList, new Comparator<Person>() {
         return o1.getWeight().compareTo(o2.getWeight());
     }
 });
-复制代码
+
 ```
 
 *Java 8写法*：
 
 ```java
 personList.sort(Comparator.comparing(Person::getWeight));
-复制代码
+
 ```
 
 *熟悉 Linux 操作的同学对这个指令应该不默认*：
@@ -60,7 +60,7 @@ Java 8 的第一个编程思想就是**流处理**，流式一系列数据项，
 
 ```java
 List<Flower> flowerList = Arrays.asList(new Flower("red", 6), new Flower("yellow", 7), new Flower("pink", 8));
-复制代码
+
 ```
 
 这个时候如果我想要红花，那么传统写法是这样子的：
@@ -72,7 +72,7 @@ for (Flower flower : flowerList) {
         resList.add(flower);
     }
 }
-复制代码
+
 ```
 
 那么如果我想要8块钱以下的花，那么写法就是这样的：
@@ -84,7 +84,7 @@ for (Flower flower : flowerList) {
         resList.add(flower);
     }
 }
-复制代码
+
 ```
 
 **其实代码写法大部分都是一样的，只是判断的条件不一样，那么我们进行第一版优化**：
@@ -99,7 +99,7 @@ public static boolean isRed(Flower flower) {
 public static boolean isLowPrice(Flower flower) {
     return flower.getPrice() < 8;
 }
-复制代码
+
 ```
 
 借助函数式接口`Predicate`，将我们自定义的方法传递进去：
@@ -114,7 +114,7 @@ public static List<Flower> filterFlower(List<Flower> flowers, Predicate<Flower> 
     }
     return resList;
 }
-复制代码
+
 ```
 
 使用：
@@ -122,7 +122,7 @@ public static List<Flower> filterFlower(List<Flower> flowers, Predicate<Flower> 
 ```java
 filterFlower(flowerList,Flower::isRed);
 filterFlower(flowerList,Flower::isLowPrice);
-复制代码
+
 ```
 
 我们也可以借助 `Lambda` 流来传递函数，就可以不用事先写好判断函数了：
@@ -130,7 +130,7 @@ filterFlower(flowerList,Flower::isLowPrice);
 ```java
 filterFlower(flowerList, (Flower f) -> StringUtils.equals("red", f.getColor()));
 filterFlower(flowerList, (Flower f) -> f.getPrice() < 8);
-复制代码
+
 ```
 
 #### 默认方法
@@ -157,7 +157,7 @@ class dog implements Animal {
     @Override
     public void eat() {}
 }
-复制代码
+
 ```
 
 Java 8 之后可以这样写：
@@ -184,7 +184,7 @@ class dog implements Animal {
     @Override
     public void eat() {}
 }
-复制代码
+
 ```
 
 *以上便是 Java 8 的部分特性，那么接下来就让我们来了解 Java 8的使用*
@@ -206,7 +206,7 @@ public static List<Flower> filterFlower(List<Flower> flowers) {
         }
     }
 }
-复制代码
+
 ```
 
 *需求2*：筛选出绿色的话
@@ -222,7 +222,7 @@ public static List<Flower> filterFlowerByColor(List<Flower> flowers, String colo
         }
     }
 }
-复制代码
+
 ```
 
 *需求3*：筛选出价格小于8块钱的花
@@ -238,7 +238,7 @@ public static List<Flower> filterFlowerByPrice(List<Flower> flowers, Integer pri
         }
     }
 }
-复制代码
+
 ```
 
 
@@ -256,7 +256,7 @@ public static List<Flower> filterFlower(List<Flower> flowers, String color, Inte
     }
     return resList;
 }
-复制代码
+
 ```
 
 通过`flag`来控制要筛选价格类型的花还是颜色类型的花，但是这种写法实在是不美观。
@@ -269,7 +269,7 @@ public static List<Flower> filterFlower(List<Flower> flowers, String color, Inte
 interface FilterPrecidate {
     boolean test(Flower flower);
 }
-复制代码
+
 ```
 
 然后自定义两个行为过滤类继承这个接口：
@@ -288,7 +288,7 @@ class LowPriceFilterPredicate implements FilterPrecidate {
         return flower.getPrice() < 8;
     }
 }
-复制代码
+
 ```
 
 然后重写我们的过滤方法，通过将行为作为参数传递：
@@ -307,21 +307,21 @@ public static List<Flower> filterFlower(List<Flower> flowers, FilterPrecidate fi
 /*****    使用    *****/
 filterFlower(flowerList,new RedColorFilterPredicate());
 filterFlower(flowerList,new LowPriceFilterPredicate());
-复制代码
+
 ```
 
 这样子我们的代码已经很明了，但是我们再观察一下上面的方法，`filterFlower()`这个方法只能传递对象作为参数，而`FilterPrecidate`对象的核心方法也只有`test()`，如果我们有新的行为就需要新建一个类继承`FilterPrecidate`接口实现`test()`方法。那么我们有没有办法直接将`test()`这一个行为作为参数传递，答案是有的：*Lombda*.
 
 ```JAVA
 filterFlower(flowerList, (Flower flower) -> flower.getPrice() > 8);
-复制代码
+
 ```
 
 我们甚至可以将多种行为作为作为一个参数传递：
 
 ```java
 filterFlower(flowerList, (Flower flower) -> flower.getPrice() > 8 && StringUtils.equals("red", flower.getColor()));
-复制代码
+
 ```
 
 可以看到，行为参数化是一个很有用的模式，它能够轻松地使用不断变化的需求，这种模式可以把一个行为封装起来，并通过传递和使用创建的行为将方法的行为参数化。
@@ -337,28 +337,28 @@ Collections.sort(flowerList, new Comparator<Flower>() {
         return o1.getPrice().compareTo(o2.getPrice());
     }
 });
-复制代码
+
 ```
 
 那么通过行为参数化我们可以这样写：
 
 ```java
 Collections.sort(flowerList,(o1, o2) -> o1.getPrice().compareTo(o2.getPrice()));
-复制代码
+
 ```
 
 也可以这样写：
 
 ```java
 Collections.sort(flowerList, Comparator.comparing(Flower::getPrice));
-复制代码
+
 ```
 
 甚至可以这样写：
 
 ```java
 flowerList.sort(Comparator.comparing(Flower::getPrice));
-复制代码
+
 ```
 
 *对比一下传统写法，你是不是已经开始爱上这种方式的写法了*
@@ -392,28 +392,28 @@ flowerList.sort(Comparator.comparing(Flower::getPrice));
   public interface Comparator<T>{
       int compare(T o1, T o2);
   }
-  复制代码
+  
   ```
 
 - ```java
   public interface Runnable{
       void run();
   }
-  复制代码
+  
   ```
 
 - ```java
   public interface ActionListener extends EventListener{
       void actionPerformed(ActionEvent e);
   }
-  复制代码
+  
   ```
 
 - ```java
   public interface Callable<V>{
       V call();
   }
-  复制代码
+  
   ```
 
 *Lambda 表达式可以允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的示例（Lambda表达式就是函数式接口一个具体实现的示例）*。
@@ -427,7 +427,7 @@ Runnable runnable = new Runnable() {
     };
 
 Runnable r = () -> System.out.println("这是使用 Lambda 的写法");
-复制代码
+
 ```
 
 #### 使用函数式接口
@@ -449,7 +449,7 @@ public static List<Flower> filterFlower(List<Flower> flowers, Predicate<Flower> 
 
 /*****      使用方式        *****/
 filterFlower(flowerList, (Flower flower) -> flower.getPrice() > 8);
-复制代码
+
 ```
 
 **`Consumer`**
@@ -459,7 +459,7 @@ filterFlower(flowerList, (Flower flower) -> flower.getPrice() > 8);
 ```java
 List<Integer> nums = Arrays.asList(1,2,3,4);
 nums.forEach(integer -> System.out.println(integer));
-复制代码
+
 ```
 
 **`Function`**
@@ -468,7 +468,7 @@ nums.forEach(integer -> System.out.println(integer));
 
 ```java
 (String s) -> s.length()
-复制代码
+
 ```
 
 **`Supplier`**
@@ -477,7 +477,7 @@ nums.forEach(integer -> System.out.println(integer));
 
 ```java
 Callable<Integer> call = () -> 1 ;
-复制代码
+
 ```
 
 #### 类型检查
@@ -511,7 +511,7 @@ Lambda 表达式不仅能够使用主体里面的参数，也能够使用自由�
 ```java
 int tmpNum = 1；
 Runnable r = () -> System.out.println(tmpNum);
-复制代码
+
 ```
 
 注意点：**Lambda 表达式对于全局变量和静态变量可以没有限制的使用，但是对于局部变量必须显示声明为 final**
@@ -526,7 +526,7 @@ Runnable r = () -> System.out.println(tmpNum);
 
 ```java
 List<Flower> flowerList = Arrays.asList(new Flower("red", 6), new Flower("yellow", 7), new Flower("pink", 8));
-复制代码
+
 ```
 
 - `(Flower f)->f.getPrice();` *==>* `Flower::getPrice`
@@ -534,7 +534,7 @@ List<Flower> flowerList = Arrays.asList(new Flower("red", 6), new Flower("yellow
 
 ```java
 List<Integer> nums = Arrays.asList(1, 2, 3, 4);
-复制代码
+
 ```
 
 - `nums.forEach(integer -> System.out.println(integer));` *===>* `nums.forEach(System.out::println);`
@@ -553,28 +553,28 @@ List<Integer> nums = Arrays.asList(1, 2, 3, 4);
 
 ```java
 List<Flower> flowerList = Arrays.asList(new Flower("red", 6), new Flower("yellow", 7), new Flower("pink", 8), new Flower("white", 8));
-复制代码
+
 ```
 
 按鲜花的价格进行排序：
 
 ```java
 flowerList.sort(Comparator.comparing(Flower::getPrice));
-复制代码
+
 ```
 
 这样子默认是使用升序进行排列的，那么我们如果想进项降序：`使用 reversed()`
 
 ```java
 flowerList.sort(Comparator.comparing(Flower::getPrice).reversed());
-复制代码
+
 ```
 
 这里的粉花和白花的价格一样，那我们在价格排序完后再按照颜色排序那应该怎么做：`使用 thenComparing()`
 
 ```java
 flowerList.sort(Comparator.comparing(Flower::getPrice).thenComparing(Flower::getColor));
-复制代码
+
 ```
 
 **`谓词复合`**
@@ -586,7 +586,7 @@ flowerList.sort(Comparator.comparing(Flower::getPrice).thenComparing(Flower::get
 ```java
 Predicate<Flower> redFlower = (t) -> StringUtils.equals("red",t.getColor());
 Predicate<Flower> notRedFlower = redFlower.negate();
-复制代码
+
 ```
 
 - `and`：*且*
@@ -595,7 +595,7 @@ Predicate<Flower> notRedFlower = redFlower.negate();
 Predicate<Flower> redFlower = (t) -> StringUtils.equals("red", t.getColor());
 Predicate<Flower> lowPriceFlower = (t) -> t.getPrice() < 8;
 Predicate<Flower> redAndLowPriceFlower = redFlower.and(lowPriceFlower);
-复制代码
+
 ```
 
 - `or`：*或*
@@ -604,7 +604,7 @@ Predicate<Flower> redAndLowPriceFlower = redFlower.and(lowPriceFlower);
 Predicate<Flower> redFlower = (t) -> StringUtils.equals("red", t.getColor());
 Predicate<Flower> lowPriceFlower = (t) -> t.getPrice() < 8;
 Predicate<Flower> redOrLowPriceFlower = redFlower.or(lowPriceFlower);
-复制代码
+
 ```
 
 **`函数复合`**
@@ -618,7 +618,7 @@ Function<Integer, Integer> addRes = a1 -> a1 + 1;
 Function<Integer, Integer> mulRes = a1 -> a1 * 2;
 Function<Integer, Integer> andThenResult = addRes.andThen(mulRes);
 Integer apply = andThenResult.apply(1);   // 结果为 4 ==> (1 + 1) * 2
-复制代码
+
 ```
 
 - `compose`
@@ -628,7 +628,7 @@ Function<Integer, Integer> addRes = a1 -> a1 + 1;
 Function<Integer, Integer> mulRes = a1 -> a1 * 2;
 Function<Integer, Integer> composeResult = addRes.compose(mulRes);
 Integer apply = composeResult.apply(1);  // 结果为 3 ==> (1 * 2) + 1
-复制代码
+
 ```
 
 *两者的区别就是操作的顺序不一样*
@@ -643,7 +643,7 @@ Integer apply = composeResult.apply(1);  // 结果为 3 ==> (1 * 2) + 1
 
 ```java
 List<Flower> flowerList = Arrays.asList(new Flower("red", 10), new Flower("yellow", 7), new Flower("pink", 8), new Flower("white", 8), new Flower("black", 12));
-复制代码
+
 ```
 
 *需求*：获取10块钱以下并且按照价格排序的花的颜色
@@ -667,14 +667,14 @@ List<String> lowPriceFlowerColor = new ArrayList<>();
 for (Flower priceFlower : lowPriceFlowers) {
     lowPriceFlowerNames.add(priceFlower.getColor());
 }
-复制代码
+
 ```
 
 为了完成这个需求不仅代码量大，还多定义了`lowPriceFlowers` 这个临时变量，真的是糟糕透了！ Java 8 之后，代码才应该有它该有的样子：
 
 ```java
 List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).sorted(Comparator.comparing(Flower::getPrice)).map(Flower::getColor).collect(Collectors.toList());
-复制代码
+
 ```
 
 *通过`filter`筛选出10元以下的花，然后通过`sorted`按照花的价格进行排序，再通过`map`映射出花的颜色，最后通过`collect`将流归约成一个集合*。filter 处理的结果传给了 sorted 方法，再传给 map 方法，最后传给 collect 方法。
@@ -683,7 +683,7 @@ List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).sorted(
 
 ```java
 flowerList.parallelStream().filter(t->t.getPrice()<10).sorted(Comparator.comparing(Flower::getPrice)).map(Flower::getColor).collect(Collectors.toList());
-复制代码
+
 ```
 
 因为 `filter` 、`sorted` 、`map` 和 `collect` 等操作是与具体线程模型无关的高层次构件，所以它们的内部实现可以是单线程的，也可能透明地充分利用你的多核架构！在实践中，这意味着你用不着为了让某些数据处理任务并行而去操心线程和锁。
@@ -699,7 +699,7 @@ List<String> color = Arrays.asList("red", "yellow", "pink");
 Stream<String> s = title.stream();
 s.forEach(System.out::println);     //在这里 流已经被消费了
 s.forEach(System.out::println);     //如果这里再消费流则会报错！
-复制代码
+
 ```
 
 ### 3）流的操作
@@ -713,7 +713,7 @@ List<String> colorList =  flowerList.stream()                     //获取流
                                     .limit(3)                     //中间操作
                                     .map(Flower::getColor)        //中间操作
                                     .collect(Collectors.toList());//终端操作
-复制代码
+
 ```
 
 #### 中间操作：
@@ -753,7 +753,7 @@ List<String> colorList =  flowerList.stream()                     //获取流
 
 ```java
 List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).collect(Collectors.toList());
-复制代码
+
 ```
 
 
@@ -767,7 +767,7 @@ List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).collect
 ```java
 List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
 numbers.stream().filter(i -> i % 2 == 0).distinct().forEach(System.out::println);
-复制代码
+
 ```
 
 
@@ -780,7 +780,7 @@ numbers.stream().filter(i -> i % 2 == 0).distinct().forEach(System.out::println)
 
 ```java
 List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).limit(3).collect(Collectors.toList());
-复制代码
+
 ```
 
 
@@ -793,7 +793,7 @@ List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).limit(3
 
 ```java
 List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).skip(2).collect(Collectors.toList());
-复制代码
+
 ```
 
 
@@ -808,7 +808,7 @@ List<String> colorList =  flowerList.stream().filter(t->t.getPrice()<10).skip(2)
 
 ```java
 List<String> colors = flowerList.stream().map(Flower::getColor).collect(Collectors.toList());
-复制代码
+
 ```
 
 **它是创建一个新的集合，而不是修改原有的集合**
@@ -829,7 +829,7 @@ words.stream().map(t->t.split("")).distinct().collect(Collectors.toList());
 /*****      结果      *****
 [[Ljava.lang.String;@2cdf8d8a, [Ljava.lang.String;@30946e09]
  **/
-复制代码
+
 ```
 
 可以看到，这样处理后的结果是一个数组的集合，并不是我们想要的结果，这是因为map返回的流实际上是`Stream<String[]>`类型的。但是我们想要的是`Stream<String>`来表示一个字符流。
@@ -847,7 +847,7 @@ words.stream().map(t -> t.split("")).map(Arrays::stream).distinct.collect(Collec
 /*****      结果      *****
 [java.util.stream.ReferencePipeline$Head@1698c449, java.util.stream.ReferencePipeline$Head@5ef04b5]
  **/
-复制代码
+
 ```
 
 这是返回了一个`Stream<String>`的集合，貌似只要将这个集合处理合并一下就可以解决问题了。所以`flatMap()`出现了。
@@ -857,7 +857,7 @@ words.stream().map(t->t.split("")).flatMap(t -> Arrays.stream(t)).distinct().col
 /*****      结果      *****
 [H, e, l, o, W, r, d]
  **/
-复制代码
+
 ```
 
 果然，已经成功解决了问题，`flatMap`方法就是让你把一个流中的每个值都转成另一个流，然后把所有的流连接起来成为一个流。
@@ -876,7 +876,7 @@ words.stream().map(t->t.split("")).flatMap(t -> Arrays.stream(t)).distinct().col
 
 ```java
 boolean res = flowerList.stream().anyMatch(t -> t.getPrice() < 8);
-复制代码
+
 ```
 
 - `allMatch()`
@@ -885,7 +885,7 @@ boolean res = flowerList.stream().anyMatch(t -> t.getPrice() < 8);
 
 ```java
 boolean res = flowerList.stream().allMatch(t -> t.getPrice() < 8);
-复制代码
+
 ```
 
 - `noneMatch()`
@@ -894,7 +894,7 @@ boolean res = flowerList.stream().allMatch(t -> t.getPrice() < 8);
 
 ```java
 boolean res = flowerList.stream().noneMatch(t -> t.getPrice() < 8);
-复制代码
+
 ```
 
 *（5）查找*
@@ -905,7 +905,7 @@ boolean res = flowerList.stream().noneMatch(t -> t.getPrice() < 8);
 
 ```java
 flowerList.stream().filter(t->t.getPrice()<8).findAny();
-复制代码
+
 ```
 
 - `findFirst`
@@ -914,7 +914,7 @@ flowerList.stream().filter(t->t.getPrice()<8).findAny();
 
 ```java
 flowerList.stream().filter(t->t.getPrice()<8).findFirst();
-复制代码
+
 ```
 
 *（6）归约*
@@ -936,7 +936,7 @@ int res = 0;
 for (Integer num : nums) {
     res += num;
 }
-复制代码
+
 ```
 
 改进后：
@@ -947,7 +947,7 @@ int res = nums.stream().reduce(0,(a, b) -> a + b);
 int res = nums.stream().reduce(0,Integer::sum);
 // 一个参数版
 Optional<Integer> o = nums.stream().reduce(Integer::sum);
-复制代码
+
 ```
 
 **`最大值和最小值`**
@@ -965,7 +965,7 @@ for (Integer num : nums) {
         min = num;
     }
 }
-复制代码
+
 ```
 
 改进后：
@@ -977,7 +977,7 @@ int min = nums.stream().reduce(Integer.MAX_VALUE,Integer::min);
 // 一个参数版
 Optional<Integer> maxOption = nums.stream().reduce(Integer::max);
 Optional<Integer> minOption = nums.stream().reduce(Integer::min);
-复制代码
+
 ```
 
 *（7）小练习（出于网上）*
@@ -999,7 +999,7 @@ Optional<Integer> minOption = nums.stream().reduce(Integer::min);
 ```java
 Stream<String> stream = Stream.of("hello","world");
 Stream<String> emptyStream = Stream.empty();
-复制代码
+
 ```
 
 - 由数组创建流：`Arrays.stream()`
@@ -1007,7 +1007,7 @@ Stream<String> emptyStream = Stream.empty();
 ```java
 int[] numbers = {2, 3, 5, 7, 11, 13};
 int sum = Arrays.stream(numbers).sum();
-复制代码
+
 ```
 
 - 由文件生成流：`File.lines（）`
@@ -1022,7 +1022,7 @@ uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" ")))
 }catch(IOException e){
 }
 // 使用 Files.lines 得到一个流，其中的每个元素都是给定文件中的一行。然后，你可以对 line 调用 split 方法将行拆分成单词
-复制代码
+
 ```
 
 ### 5）收集器的使用
@@ -1031,7 +1031,7 @@ uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" ")))
 
 ```java
 List<Flower> flowerList = Arrays.asList(new Flower("red", 10), new Flower("yellow", 7), new Flower("pink", 8), new Flower("yellow", 8), new Flower("red", 12));
-复制代码
+
 ```
 
 这个时候我想按照花的颜色进行分类，获取一个`Map<String, List<Flower>>`
@@ -1047,14 +1047,14 @@ for (Flower flower : flowerList) {
     }
     listMap.get(flower.getColor()).add(flower);
 }
-复制代码
+
 ```
 
 相信以上代码是比较常见的，那么当我们学习了 Java 8之后有没有什么比较好的写法呢：
 
 ```java
 Map<String,List<Flower>> map = flowerList.stream().collect(Collectors.groupingBy(Flower::getColor));
-复制代码
+
 ```
 
 一行代码解决，Java 8 真的是秀啊！
@@ -1067,7 +1067,7 @@ Map<String,List<Flower>> map = flowerList.stream().collect(Collectors.groupingBy
 Long c1 = flowerList.stream().collect(Collectors.counting());
 //也可以直接用 count() 方法来计数
 Long c2 = flowerList.stream().count();
-复制代码
+
 ```
 
 *用来查找最大值和最小值*：
@@ -1075,28 +1075,28 @@ Long c2 = flowerList.stream().count();
 ```java
 Optional<Flower> max = flowerList.stream().collect(Collectors.maxBy(Comparator.comparing(Flower::getPrice)));
 Optional<Flower> min = flowerList.stream().collect(Collectors.minBy(Comparator.comparing(Flower::getPrice)));
-复制代码
+
 ```
 
 *用来求和*：
 
 ```java
 Integer sum = flowerList.stream().collect(Collectors.summingInt(Flower::getPrice));
-复制代码
+
 ```
 
 *用来求平均数*：
 
 ```java
 Double avg = flowerList.stream().collect(Collectors.averagingInt(Flower::getPrice));
-复制代码
+
 ```
 
 *用来连接字符串*：
 
 ```java
 String color = flowerList.stream().map(Flower::getColor).collect(Collectors.joining(", "));
-复制代码
+
 ```
 
 ### 6）分组的使用
@@ -1109,7 +1109,7 @@ List<Flower> flowerList = Arrays.asList(new Flower("red", 10), new Flower("yello
 /*****      结果      *****
 {red=[Flower(color=red, price=10), Flower(color=red, price=12)], pink=[Flower(color=pink, price=8)], yellow=[Flower(color=yellow, price=7), Flower(color=yellow, price=8)]}
  **/
-复制代码
+
 ```
 
 *按照颜色分组*：`Map<String,List<Flower>>`
@@ -1119,7 +1119,7 @@ Map<String,List<Flower>> color = flowerList.stream().collect(Collectors.grouping
 /*****      结果      *****
 {red=[Flower(color=red, price=10), Flower(color=red, price=12)], pink=[Flower(color=pink, price=8)], yellow=[Flower(color=yellow, price=7), Flower(color=yellow, price=8)]}
  **/
-复制代码
+
 ```
 
 *统计每种颜色的数量*：`Map<String, Long>`
@@ -1129,7 +1129,7 @@ Map<String, Long> longMap = flowerList.stream().collect(Collectors.groupingBy(Fl
 /*****      结果      *****
 {red=2, pink=1, yellow=2}
  **/
-复制代码
+
 ```
 
 也可以支持多级分组
@@ -1147,7 +1147,7 @@ Map<String, Map<String, List<Flower>>> collect = flowerList.stream().collect(Col
 /*****      结果      *****
 {red={HIGHT_PRICE=[Flower(color=red, price=10), Flower(color=red, price=12)]}, pink={HIGHT_PRICE=[Flower(color=pink, price=8)]}, yellow={HIGHT_PRICE=[Flower(color=yellow, price=8)], LOW_PRICE=[Flower(color=yellow, price=7)]}}
  **/
-复制代码
+
 ```
 
 *先按颜色分组，再找每个颜色中最贵的花*：`Map<String, Flower>`
@@ -1157,7 +1157,7 @@ Map<String, Flower> f = flowerList.stream().collect(Collectors.groupingBy(Flower
 /*****      结果      *****
 {red=Flower(color=red, price=12), pink=Flower(color=pink, price=8), yellow=Flower(color=yellow, price=8)}
  **/
-复制代码
+
 ```
 
 这个工厂方法接受两个参数——要转换的收集器以及转换函数，并返回另一个收集器。这个收集器相当于旧收集器的一个包装， collect 操作的最后一步就是将返回值用转换函数做一个映射。在这里，被包起来的收集器就是用 maxBy 建立的那个，而转换函数 Optional::get 则把返回的 Optional 中的值提取出来。
@@ -1209,7 +1209,7 @@ private String getPhoneType(Person person) {
     }
     return "";
 }
-复制代码
+
 ```
 
 每次引用都做一次判空操作，效果想必也不赖，也可以避免空指针异常。当时每一次判空都得添加一个 `if` 判断，真实让人头大。
@@ -1230,7 +1230,7 @@ private String getPhoneType(Person person) {
 private String getPhoneType(Person person) {
     return Optional.ofNullable(person).map(Person::getPhone).map(Phone::getType).orElse("");
 }
-复制代码
+
 ```
 
 一行代码搞定，干净利落。
@@ -1267,7 +1267,7 @@ Optional 中的 `map()`方法和流中的`map()`相似，都是从Optional对象
 
 ```java
 Optional<String> name = Optional.ofNullable(person).map(Person::getName);
-复制代码
+
 ```
 
 获取到的是一个Optional对象是为了防止获取到一个 null，我们可以通过`Optional.get()`来获取值。
@@ -1319,7 +1319,7 @@ Optional<String> name = Optional.ofNullable(person).map(Person::getName);
 ```java
 Date date = new Date(120, 6, 18);
 System.out.println(date);   // Sat Jul 18 00:00:00 CST 2020
-复制代码
+
 ```
 
 这种的构造方式简直是糟糕透了不是吗，对于不了解Date 的来说太不友好了。在java1.1 后出现了`Calender`这个类，而`Date`中大部分方法都被废弃了，但是`Calender`这个类中也有类似的问题和设计缺陷，而且两个日期类的出现，我们有时候也难以选择使用哪一个。
@@ -1336,7 +1336,7 @@ int day = nowDate.getDayOfMonth();              //18
 DayOfWeek dayOfWeek = nowDate.getDayOfWeek();   //SATURDAY
 int days = nowDate.lengthOfMonth();             //31
 LocalDate nowdate = LocalDate.now();            //获取当前时间>2020-07-18
-复制代码
+
 ```
 
 也可以使用 TemporalField 读取 LocalDate 的值
@@ -1346,7 +1346,7 @@ LocalDate nowDate = LocalDate.of(2020,7,18);        //2020-07-18
 int year = nowDate.get(ChronoField.YEAR);           //2020
 int month = nowDate.get(ChronoField.MONTH_OF_YEAR); //07
 int day = nowDate.get(ChronoField.DAY_OF_MONTH);    //18
-复制代码
+
 ```
 
 #### LocalTime
@@ -1358,7 +1358,7 @@ LocalTime nowTime = LocalTime.of(19, 34, 32);  //19:34:32
 int hour = nowTime.getHour();                  //19
 int minute = nowTime.getMinute();              //34
 int second = nowTime.getSecond();              //32
-复制代码
+
 ```
 
 同样也可以使用 TemporalField 读取 LocalTime 的值
@@ -1368,7 +1368,7 @@ LocalTime nowTime = LocalTime.of(19, 34, 32);           //19:34:32
 int hour = nowTime.get(ChronoField.HOUR_OF_DAY);        //19
 int minute = nowTime.get(ChronoField.MINUTE_OF_HOUR);   //34
 int second = nowTime.get(ChronoField.SECOND_OF_MINUTE); //32
-复制代码
+
 ```
 
 #### LocalDateTime
@@ -1386,7 +1386,7 @@ LocalDateTime dt5 = nowTime.atDate(nowDate);
 
 LocalDate date1 = dt1.toLocalDate();        //2020-07-18
 LocalTime time1 = dt1.toLocalTime();        //19:45:20
-复制代码
+
 ```
 
 时间点的日期 时间类的通用方法：
@@ -1420,7 +1420,7 @@ Duration threeMinutes = Duration.of(3, ChronoUnit.MINUTES);
 Period tenDays = Period.ofDays(10);
 Period threeWeeks = Period.ofWeeks(3);
 Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);
-复制代码
+
 ```
 
 日期 - 时间类中表示时间间隔的通用方法：
