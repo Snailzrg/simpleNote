@@ -34,34 +34,34 @@ git branch --set-upstream-to=origin/master(远程分支) master(本地分支)--a
 
  1 创建本地新分支 'dev-01'
  git branch dev-01
- 
+
  2 查看分支，创建成功
  $ git branch -a
- 
+
  3 检查一下仓库名称
  查看当前配置有哪些远程仓库：$ git remote
  （在克隆完某个项目后，（进到该项目文件夹中），至少可以看到一个名为 origin 的远程库，Git 默认使用这个名字来标识你所克隆的原始仓库）
- 
+
  4 本地分支推上去，远程会自动生成同名新分支（dev-01）
  $ git push origin dev-01
- 
+
  5 将当前分支与远程某分支关联
  $ git branch --set-upstream-to=origin/dev-01
- 
+
  6 查看关联情况
  $ git branch -vv
- 
+
  7 最后把本地代码推上去
  $ git add .
  $ git commit -m 'your commit info'
  $ git push origin dev-01
- 
-  
+
+
  总结：dev-01就是从dev分支创建的新分支
- 
- 
+
+
  ------   合并dev 代码到master -------
- 
+
 将dev分支上的代码合并到master分支
 发表于 2020-03-29  |  分类于 后端  |  没有评论
 1、切换到master分支
@@ -78,3 +78,13 @@ git branch --set-upstream-to=origin/master(远程分支) master(本地分支)--a
 
 5、将合并后的代码提交到远程master上面
 ​ git push
+
+
+
+
+
+
+
+
+
+# git 将A分支的特定提交合并到B分支
