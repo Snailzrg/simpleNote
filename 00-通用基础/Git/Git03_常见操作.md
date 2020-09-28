@@ -1,4 +1,35 @@
+###  git 简单初始化
+
+Git 全局设置:
+
+```
+git config --global user.name "snailzrg"
+git config --global user.email "snailzrg@163.com"
+```
+
+创建 git 仓库:
+
+```
+mkdir snail-resources
+cd snail-resources
+git init
+touch README.md
+git add README.md
+git commit -m "first commit"
+git remote add origin git@gitee.com:snailzrg/snail-resources.git
+git push -u origin master
+```
+
+已有仓库?
+
+```
+cd existing_git_repo
+git remote add origin git@gitee.com:snailzrg/snail-resources.git
+git push -u origin master
+```
+
 ##  本地仓库与远程仓库的关联
+
 > 查看本地仓库关联的远程仓库信息 命令：git remote show origin 
 - 已关联
 
@@ -513,3 +544,26 @@ Cloning into 'hutool'...
 The authenticity of host 'gitee.com (180.97.125.228)' can't be established.
 ECDSA key fingerprint is SHA256:FQGC9Kn/eye1W8icdBgrQp+KkGYoFgbVr17bmjey0Wc.
 Are you sure you want to continue connecting (yes/no)? yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###   https://blog.csdn.net/u012145252/article/details/80628451
+
+git 拉取报错    2:30	Error merging: refusing to merge unrelated histories
+
+
+
