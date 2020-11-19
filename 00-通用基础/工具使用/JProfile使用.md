@@ -2,7 +2,9 @@
   好用的性能分析
  - [Jprofile安装](https://blog.csdn.net/vicky_pyh/article/details/88797514)
 
-JProfiler是一个重量级的JVM监控工具，提供对JVM精确监控，其中堆遍历、CPU剖析、线程剖析看成定位当前系统瓶颈的得力工具。可以统计压测过程中JVM的监控数据，定位性能问题。
+JProfiler是一个重量级的JVM监控工具，提供对JVM精确监控，其中堆遍历、CPU剖析、线程剖析看成定位当前系统瓶颈的得力工具。可以统计
+
+压测过程中JVM的监控数据，定位性能问题。
 JProfiler下载与安装 环境准备 JProfiler 17.1.5（IDEA插件） JProfiler 9.2（可执行软件） IntelliJ IDEA 2017.2.5 JProfiler插件安装 方式一： 直接在IDEA上下载File–Settings–plugins–Browse repositories ，找到jprofiler然后点击安装。
 
 看到如下图片则说明安装完成

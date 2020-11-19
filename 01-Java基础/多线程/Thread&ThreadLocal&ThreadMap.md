@@ -67,7 +67,7 @@ public synchronized void start() {
     }
 
     private native void start0();
-复制代码
+
 ```
 
 ### run()

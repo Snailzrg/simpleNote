@@ -8,9 +8,9 @@
 必须的分区
 
            boot分区：         
-
+    
                      作用：引导分区，包含了系统启动的必要内核文件，即使根分区顺坏也能正常引导启动 一般这些文件所占空间在200M以下，
-
+    
                      分区建议：分区的时候可选100M-500M之间,如果空间足够用，建议分300-500M。避免由于长期使用的冗余文件塞满这个分区。
 
 　　　　　　分区格式：建议ext4，按需求更改
@@ -20,9 +20,9 @@
 　　　　　　作用：所有的文件都从这里开始，你可以比喻为Windows的C盘，但其实有区别。如果你有大量的数据在根目录下（比如FTP等）可以划分大一点的空间
 
                       分区建议：建议15G以上。看需求，根分区和home分区的大小就类似C盘和D盘的空间分布一样，主要占空间在哪儿就在那里分大容量
-
+    
                       分区格式：建议ext4，按需求更改
-
+    
           swap分区：
 
    　　　　　作用：类似于Windows的虚拟内存，在内存不够用时占用硬盘的虚拟内存来进行临时数据的存放，而对于linux就是swap分区
@@ -38,9 +38,9 @@
 　　　　       作用：存放用户数据，HOME的结构一般是 HOME/userName/userFile，如果不分则默认在/目录下
 
                      分区建议：如果用户数据多可以将此分区适当增大，请参考“根分区”分区建议；一般硬盘的主要容量几乎都在Home分区和根分区下
-
+    
                      分区格式：建议ext4，按需求更改
-
+    
          var分区
 
 　　　　      作用：用于log日志的文件的存放，如果不分则默认在/目录下
@@ -65,6 +65,33 @@ https://blog.csdn.net/u013626215/article/details/88645003
 
 
 # 配置 
+
+# centeros7配置
+
+netstat -anlpt | grep 22
+
+yum instatll net-tools –y    ----安装netstat工具
+
+所以我们需要重新安装即可
+yum reinstall openssh-server
+
+
+云服务器 ECS Linux CentOS 7 下重启服务通过service 操作报错：
+Redirecting to /bin/systemctl restart sshd.service
+查资料发现，在ESC下重启服务是通过systemctl 操作： 
+例：1、启动sshd服务：
+systemctl start sshd.service
+2.、重启 sshd 服务：
+systemctl restart sshd.service
+3、 设置服务开启自启：
+systemctl enable sshd.service 
+
+
+首先使用ip add命令查看系统当前IP地址，可以看到当前IP地址是10.0.0.3
+查看之后你就会发现ens33是没有inet属性的，然而不存在这个属性是不可以连接虚拟机的。 vi/etc/sysconf ig/network-scripts/ifcfg/ens33
+
+
+
 ## [修改CentOS默认yum源为国内yum镜像源](https://blog.csdn.net/xiaojin21cen/article/details/84726193?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.nonecase)
 - 拉阿里云镜像   `wget -O /etc/yum.repos.d/CentOS-Base.repo.aliyun  http://mirrors.aliyun.com/repo/Centos-7.repo`
 	
@@ -75,3 +102,13 @@ https://blog.csdn.net/u013626215/article/details/88645003
 - 运行yum makecache生成缓存   `yum clean all & yum makecache`
 
 rpm -qa | grep yum  <!-- 是否安装yum  yum repolist all -->
+
+
+
+> 如果 Linux中提示-bash: wget: command not found的解决方法 没有安装下载器
+
+- yum install wget -y       centeros
+
+- apt-get install -y wget   Ubuntu/Debian
+
+

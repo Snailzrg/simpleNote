@@ -3,7 +3,7 @@
 > wget http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
 
 1.先卸载centeros自带jdk
-- rpm-qa|grepopenjdk 
+- rpm-qa|grep openjdk 
 查询出来的自带的openjdk
 - 2.删除 rpm-e--nodeps
 
@@ -39,4 +39,8 @@ export PATH=$PATH:$M2_HOME/bin
 
 
 
-#ngnix 配置
+#ngnix 
+配置### centos yum的配置文件 repo文件详解
+
+> repo文件是Fedora中yum源（软件仓库）的配置文件，通常一个repo文件定义了一个或者多个软件仓库的细节内容，例如我们将从哪里下载需要安装或者升级的软件包，repo文件中的设置内容将被yum读取和应用！
+

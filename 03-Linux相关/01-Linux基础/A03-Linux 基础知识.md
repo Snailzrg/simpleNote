@@ -25,7 +25,7 @@
    ├── upload 
    ├── usr 		#安装除操作系统本身外的一些应用程序或组件的目录，一般可以认为是linux系统上安装的应用程序默认都安装在此目录中
    └── var
-```
+  ```
 ## 特殊文件说明
 ###  网卡配置文件
 文件位置为：/etc/sysconfig/network-scripts/ifcfg-eth0，该文件控制网卡的配置信息，网卡的配置文件统一放在network-scripts中，eth1表示第二块网卡，依次累加。
@@ -56,3 +56,20 @@ nameserver 10.0.0.2
 ```
 
 ...... 待续
+
+
+## [Linux 用户管理](https://blog.csdn.net/beyondlee2011/article/details/85341819)
+
+
+
+## [Linux 目录结构]
+
+
+
+
+
+
+
+
+
+
