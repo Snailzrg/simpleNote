@@ -6,3 +6,7 @@ db.collection.createIndex(keys, options) createIndex() 方法中你也可以设�
 
 3：Mongo的模糊查询 //db.org.find({"orgName":/湖南农业大学/})===>select * from org where orgName like ‘湖南农业大学’
 4：Mongo内嵌文档的属性名查找
+
+
+
+开两个客户端往mongodb同一个集合里面插入数据！
