@@ -64,9 +64,9 @@ message：可以不用写
 
 ![img](https://img2020.cnblogs.com/blog/1972718/202003/1972718-20200325124858815-145787238.png)
 
-![image-20200323201738802](https://gitee.com/fakefake00/NoteImgs/raw/master/img/image-20200323201738802.png)
+![image-20200323201738802](https://gitee.com/fakefake00/NoteImgs/raw/master/img/image-20200323201738802.png)![a140ebf9b938d6de50099fc5f38f81c3的副本](/Users/snailzhou/Desktop/a140ebf9b938d6de50099fc5f38f81c3的副本.jpg)
 
-- Typora使用下面这个url跟PicGo连接的，所以PicGo的设置也要对应，默认一般就是。
+- Typora使用下面这个url跟PicGo连接的，所以PicGo的设置也要对应，默认一般就是。f35667ae0fbd1e564ead1b184d944db3
 
 ![img](https://gitee.com/fakefake00/NoteImgs/raw/master/img/image-20200323203807172-1584967114062.png)
 

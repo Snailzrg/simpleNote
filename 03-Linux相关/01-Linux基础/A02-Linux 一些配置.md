@@ -18,10 +18,23 @@ systemctl restart sshd.service
 3、 设置服务开启自启：
 systemctl enable sshd.service 
 
-
 首先使用ip add命令查看系统当前IP地址，可以看到当前IP地址是10.0.0.3
 查看之后你就会发现ens33是没有inet属性的，然而不存在这个属性是不可以连接虚拟机的。 
   vi/etc/sysconf ig/network-scripts/ifcfg/ens33
+
+
+
+
+
+##  163yum
+
+1`wget -O /etc/yum.repos.d/CentOS-Base.repo.163  http://mirrors.163.com/.help/CentOS7-Base-163.repo
+
+2`mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup`
+
+3 mv /etc/yum.repos.d/CentOS-Base.repo.163  /etc/yum.repos.d/CentOS-Base.repo
+
+4 yum clean all & yum makecache
 
 
 

@@ -49,7 +49,6 @@
 
                     分区格式：建议ext4，按需求更改
 
-
 配置+网络设置
 https://www.cnblogs.com/hihtml5/p/8217062.html
 
@@ -61,3 +60,5 @@ https://www.cnblogs.com/hihtml5/p/8217062.html
 
 桥接方式
 https://blog.csdn.net/u013626215/article/details/88645003
+
+![image-20210109210330759](https://gitee.com/snailzrg/snail_img/raw/master/picgo_snail_img/image-20210109210330759.png)
