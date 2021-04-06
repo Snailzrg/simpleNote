@@ -73,3 +73,8 @@ message：可以不用写
 ![image-20200323204010678](https://gitee.com/fakefake00/NoteImgs/raw/master/img/image-20200323204010678.png)
 
 - 不过PicGo的Server监听端口会经常变动（比如电脑重启后）,就需要修改不然Typora图片也会上传失败
+
+
+
+
+# 二：设置目录显示

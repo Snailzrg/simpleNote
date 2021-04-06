@@ -14,7 +14,7 @@ jMQ的两种消息模式
 
    消息列队有两种消息模式，一种是点对点的消息模式，还有一种就是订阅的模式.
        点对点的模式主要建立在一个队列上面，当连接一个列队的时候，发送端不需要知道接收端是否正在接收，可以直接向ActiveMQ发送消息，发送的消息，将会先进入队列中，如果有接收端在监听，则会发向接收端，如果没有接收端接收，则会保存在activemq服务器，直到接收端接收消息，点对点的消息模式可以有多个发送端，多个接收端，但是一条消息，只会被一个接收端给接收到，哪个接收端先连上ActiveMQ，则会先接收到，而后来的接收端则接收不到那条消息
- 
+
 **ActiveMQ主要涉及到5个方面：**
     1. 传输协议：消息之间的传递，无疑需要协议进行沟通，启动一个ActiveMQ打开了一个监听端口， ActiveMQ提供了广泛的连接模式，其中主要包括SSL、STOMP、XMPP；ActiveMQ默认的使用的协议是openWire，端口号：61616;
     2. 消息域：ActiveMQ主要包含Point-to-Point (点对点),Publish/Subscribe Model (发布/订阅者)，其中在Publich/Subscribe 模式下又有Nondurable subscription和durable subscription (持久化订阅)2种消息处理方式
@@ -38,34 +38,15 @@ jMQ的两种消息模式
 
 
 
+###### . JMS术语
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-作者：echojson 
-来源：CSDN 
-原文：https://blog.csdn.net/echojson/article/details/79702829 
-版权声明：本文为博主原创文章，转载请附上博文链
+- - Provider/MessageProvider：生产者
+  - Consumer/MessageConsumer：消费者
+  - PTP：Point To Point，点对点通信消息模型
+  - Pub/Sub：Publish/Subscribe，发布订阅消息模型
+  - Queue：队列，目标类型之一，和PTP结合
+  - Topic：主题，目标类型之一，和Pub/Sub结合
+  - ConnectionFactory：连接工厂，JMS用它创建连接
+  - Connnection：JMS Client到JMS Provider的连接
+  - Destination：消息目的地，由Session创建
+  - Session：会话，由Connection创建，实质上就是发送、接受消息的一个线程，因此生产者、消费者都是Session创建的
