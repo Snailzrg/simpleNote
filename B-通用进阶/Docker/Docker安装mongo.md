@@ -2,7 +2,7 @@
 
 > 运行启动命令“docker run -p 27017:27017 -v /data/mongo:/data/db --name mongodb -d mongo”
 >
-> docker run -p 27018:27017 -v /Users/snailzhou/softData/dockerDates/mongo/data:/data/db --name mongodb -d mongo --auth
+> docker run -p 27018:27017 -v /Users/snailzhou/softData/dockerDatas/mongo/data:/data/db --name mongodb -d mongo --auth
 >
 > 在上面的命令中，几个命令参数的详细解释如下：
 >

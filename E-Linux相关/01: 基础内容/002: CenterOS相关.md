@@ -50,7 +50,7 @@ rpm -qa | grep yum  <!-- 是否安装yum  yum repolist all -->
 
 > 1 拉阿里云镜像   `wget -O /etc/yum.repos.d/CentOS-Base.repo.aliyun  http://mirrors.aliyun.com/repo/Centos-7.repo`
 
-> 2 备份原镜像    `mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup`
+> 2 备份原镜像    `mv /etc/yum.repos.d/CentOS-Base.repo  /CentOS-Base.repo.backup`
 
 > 3 使用阿里云    `mv /etc/yum.repos.d/CentOS-Base.repo.aliyun  /etc/yum.repos.d/CentOS-Base.repo`
 

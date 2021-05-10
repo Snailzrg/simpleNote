@@ -126,4 +126,26 @@ mybatis代码自动生成插件，大部分单表操作的代码可自动生成 
 
 详细的可以看p3c插件的安装文档：https://github.com/alibaba/p3c/tree/master/idea-plugin
 
-## END
+## 热部署神器JRebel
+
+>https://blog.csdn.net/lianghecai52171314/article/details/105637251
+
+- 在线uuid地址 生成uuid【https://www.guidgen.com/】
+
+- 服务器地址：https://jrebel.qekang.com/{GUID}
+
+![image-20210407015454645](/Users/snailzhou/Library/Application Support/typora-user-images/image-20210407015454645.png)
+
+
+
+
+
+## 查看字节码文件的插件
+
+- jclasslib
+
+
+
+## 生成junit的插件
+
+junitgenerator v2.0

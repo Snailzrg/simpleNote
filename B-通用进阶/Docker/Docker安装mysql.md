@@ -153,7 +153,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'snailzhou'@'%';
 
 
 
-
+>  ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456'; --最后刷新一下 flush privileges;
 
 https://blog.csdn.net/fanbaodan/article/details/99691071?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-1&spm=1001.2101.3001.4242
 
@@ -161,12 +161,16 @@ https://blog.csdn.net/fanbaodan/article/details/99691071?utm_medium=distribute.p
 
 ##  5.将数据目录挂在到宿主机
 
+> 
+>
+> 
+>
 > docker run --name mysqlgz -p 33307:3306  -v/data/mysql/datadir:/var/lib/mysql  -v /data/mysql/conf.d:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 > 1
 > 这种方式真的很有必要，第一如果你将容器删除了，其数据还保存载宿主机上。
 > 我专门做了一个测试：
 >
-> docker run --name mysqzrg -p 3308:3306  -v/Users/snailzhou/softData/dockerDates/mysql/data:/var/lib/mysql  -v /Users/snailzhou/softData/dockerDates/mysql/conf.d:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+> docker run --name mysqzrg -p 3307:3306  -v/Users/snailzhou/softData/dockerDatas/mysql/data:/var/lib/mysql  -v /Users/snailzhou/softData/dockerDatas/mysql/conf.d:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 
 
 
