@@ -17,6 +17,10 @@
 >
 > grant all privileges on *.* to root@'%' identified by "123456";
 
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+
+> 
+
 
 
  ## 03 mysql中对应用户开放对应库全线（禁止全用root）

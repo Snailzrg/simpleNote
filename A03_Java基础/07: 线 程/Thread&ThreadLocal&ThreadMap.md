@@ -1,3 +1,5 @@
+[toc]
+
 # Thread     ThreadLocal      ThreadMap 对比
 
 >see
@@ -591,5 +593,4 @@ Java8中for循环遍历整个Entry数组，遇到key=null的就会替换从而�
 - 每个ThreadLocal只能保存一个变量副本，如果想要一个线程能够保存多个副本以上，就需要创建多个ThreadLocal。
 - ThreadLocal内部的ThreadLocalMap键为弱引用，会有内存泄漏的风险。
 - 每次使用完ThreadLocal，都调用它的remove()方法，清除数据。
-
 

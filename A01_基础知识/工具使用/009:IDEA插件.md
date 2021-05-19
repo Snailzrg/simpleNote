@@ -1,3 +1,5 @@
+[toc]
+
 ## Java程序员不可错过的11个IDEA插件
 
 *www.jianshu.com/p/686ba0ae4ac2*

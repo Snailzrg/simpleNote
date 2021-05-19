@@ -1,3 +1,5 @@
+[toc]
+
 # Java工程师的进阶之路 RocketMQ篇（二）
 
 > 白菜Java自习室 涵盖核心知识

@@ -1,3 +1,5 @@
+[toc]
+
 # RocketMQ篇（一）
 
 > 白菜Java自习室 涵盖核心知识

@@ -1,3 +1,9 @@
+[toc]
+
+
+
+
+
 # Android Studio 中的 gradle 介绍及build.gradle配置文件详解                              
 
 不同于 Eclispse，Android  Studio 是采用 Gradle 来构建项目的，Gradle 是一个非常先进强大的项目构建工具，它使用了一种基于 Groovy  领域的特定语言（DSL）来声明项目设置，摒弃了基于 XML（如 Ant 和 Maven）的各种繁琐的配置，今天我们就来一起探讨 Android  Studio 中强大的项目构建工具 Gradle

@@ -1,4 +1,7 @@
+[toc]
+
 #  安装 【未整理】
+
   好用的性能分析
  - [Jprofile安装](https://blog.csdn.net/vicky_pyh/article/details/88797514)
 

@@ -347,6 +347,3 @@ fi
 
 (2) 如果Nginx作为代理服务器使用Tomcat处理动态资源，
 最大并发数 = worker个数 * 每个worker的最大连接数 / 4
-————————————————
-版权声明：本文为CSDN博主「[Arcadian]」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/weixin_49343190/article/details/112006564

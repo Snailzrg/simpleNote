@@ -1,4 +1,4 @@
-# Mysql
+# 一Mysql
 Linux下MySQL5.6与MySQL5.7安装方法略有不同 下面主要是5.6
 ## 安装[参考](https://blog.csdn.net/weixin_42023748/article/details/86135612)
 - [官网下载地址](https://dev.mysql.com/downloads/mysql/5.7.html#downloads)
@@ -7,13 +7,13 @@ tar -zxvf mysql-5.6.34-linux-glibc2.5-x86_64.tar.gz -C /opt/
 
  [my.cnf配置文件](https://blog.csdn.net/newxwj/article/details/99680887?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-2)
  ###  MySQL5.6版本安装
- 
+
  ####  方式一：源码安装
 + 检查是否已经安装过
 ```
 find / -name mysql    --> 	rm -rf 上边查找到的路径，多个路径用空格隔开
 find / -name mysql|xargs rm -rf   #或者使用这一条命令即可 
- ```
+```
 + 下载解压源码tar.gz
 ```
 	tar -zxvf mysql-5.6.48-linux-glibc2.12-x86_64.tar.gz -C /data/database
@@ -130,9 +130,52 @@ make
 
 
 
+##  安装mysql8
+
+#### 1.1.2 删除MariaDB的文件，
+
+由于MySQL在CentOS7中收费了，所以已经不支持MySQL了，取而代之在CentOS7内部集成了mariadb，而安装MySQL的话会和MariaDB的文件冲突，所以需要先卸载掉MariaDB.
+
+使用rpm 命令查找出要删除的mariadb文件；
+
+```html
+rpm -pa | grep mariadb
+```
+
+可能的显示结果如下：
+
+```html
+mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+删除上面的程序
+
+```html
+rpm -e mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+可能出现错误提示如下：
+
+依赖检测失败： 
+
+libmysqlclient.so.18()(64bit) 被 (已安裝) postfix-2:2.10.1-6.el7.x86_64 需要
+
+libmysqlclient.so.18(libmysqlclient_18)(64bit) 被 (已安裝) postfix-2:2.10.1-6.el7.x86_64 需要 
+
+libmysqlclient.so.18(libmysqlclient_18)(64bit) 被 (已安裝) postfix-2:2.10.1-6.el7.x86_64 需要
+
+使用强制删除：
+
+```html
+rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
+```
+
+至此就将原来有的mysql 和mariadb数据库删除了；
+
+ 
+
 
 
 ## 利用shell脚本安装配置
    待续.......
-
 

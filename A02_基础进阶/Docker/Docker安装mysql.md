@@ -1,3 +1,5 @@
+[toc]
+
 # Docker 安装 MySQL
 
 MySQL 是世界上最受欢迎的开源数据库。凭借其可靠性、易用性和性能，MySQL 已成为 Web 应用程序的数据库优先选择。
@@ -172,7 +174,7 @@ https://blog.csdn.net/fanbaodan/article/details/99691071?utm_medium=distribute.p
 >
 > docker run --name mysqzrg -p 3307:3306  -v/Users/snailzhou/softData/dockerDatas/mysql/data:/var/lib/mysql  -v /Users/snailzhou/softData/dockerDatas/mysql/conf.d:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 
-
+/root/data/mysql/data/mysql5.7docker
 
 
 
@@ -187,3 +189,27 @@ https://blog.csdn.net/fanbaodan/article/details/99691071?utm_medium=distribute.p
 
 select @@global.sql_mode;
 set @@global.sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+
+
+
+
+
+
+## docker安装5.7 
+
+```
+docker pull mysql:5.7
+
+docker run --name mysqlzrg -p 3307:3306  -v/root/data/mysql/data/mysql5.7docker/data:/var/lib/mysql -v /root/data/mysql/data/mysql5.7docker/conf.d:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+
+## 进入docekr容器
+docker exec -it mysqlzrg bash
+## 登录
+mysql -u root -p
+grant all privileges on *.* to root@"%" identified by "123456" with grant option;
+
+
+
+```
+

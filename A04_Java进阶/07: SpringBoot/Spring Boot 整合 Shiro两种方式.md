@@ -1,3 +1,5 @@
+[toc]
+
 # Spring Boot 整合 Shiro ，两种方式全总结！
 
 在 Spring Boot 中做权限管理，一般来说，主流的方案是 Spring Security ，但是，仅仅从技术角度来说，也可以使用 Shiro。

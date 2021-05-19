@@ -1,3 +1,5 @@
+[toc]
+
 # 一：Alfred配置
 
 > 快捷键 option+空格 

@@ -1,4 +1,7 @@
+[toc]
+
 ## IDEA 导入Maven不识别问题
+
 当在idea中导入maven项目时，不能自动识别pom文件
 解决方法： 
 - 1.右键pom.xml文件，选择” add as maven project”,即可自动导入pom所依赖的jar包
@@ -18,8 +21,8 @@ idea 调试对象字段显示不全问题
 如下图，取消勾选该选项，即会展示集合对象的所有字段。
 ![](Idea遇到问题_files/1.jpg)
 还有另外一个操作，就是在变量面板，选中一个变量 -> 右键 -> 'View as" -> 切换不同的类型查看效果（一般为Object即可
- 
- 
+
+
  ## 配置LOMBACK
 - [SEE](https://blog.csdn.net/qq_41441210/article/details/79891093)
 
@@ -32,7 +35,6 @@ idea 调试对象字段显示不全问题
 
 
 ## IDEA2019 插件太慢
-
 
 
 
