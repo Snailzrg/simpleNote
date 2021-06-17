@@ -211,5 +211,24 @@ grant all privileges on *.* to root@"%" identified by "123456" with grant option
 
 
 
+<!-- 设置schema 逻辑库 -->
+	<schema name="TESTDB" checkSQLschema="false" sqlMaxLimit="100" dataNode="snailDn1">
+	</schema>
+	<dataNode name="snailDn1" dataHost="host1" database="snailick" />
+	<dataHost name="host1" maxCon="1000" minCon="10" balance="3"
+			  writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+		<heartbeat>select user()</heartbeat>
+		<!-- can have multi write hosts -->
+		<writeHost host="hostM1" url="192.168.225.223:3306" user="snailzhou"
+				   password="snail1234">
+			<!-- can have multi read hosts -->
+			<readHost host="hostS1" url="192.168.225.223:3305" user="snailzhou" password="snail1234" />
+		</writeHost>
+	</dataHost>	
+
+
+
 ```
+
+
 

@@ -232,11 +232,11 @@ tar -xvf ab.tar -C /usr------C代表指定解压的位置
 ps -ef | grep sshd  查找指定ssh服务进程 
 ps -ef | grep sshd | grep -v grep 查找指定服务进程，排除gerp身 
 ps -ef | grep sshd -c 查找指定进程个数 
+
 ### 5.2 find
 > find命令在目录结构中搜索文件，并对搜索结果执行指定的操作。 
 >
 > find 默认搜索当前目录及其子目录，并且不过滤任何结果（也就是返回所有文件），将它们全都显示在屏幕上。
->
 
 使用实例：
 

@@ -38,3 +38,14 @@ idea 调试对象字段显示不全问题
 
 
 
+
+
+- 选中inherited members，可查看父类的所有方法 
+
+  > idea中 打开Inherited members  ctrl+f12
+
+- 查看继承树
+
+  - 右键xxx.class，弹出了下拉菜单选中为 browse type hirearchy 选项
+  - 右键 show diagrams
+

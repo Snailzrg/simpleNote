@@ -49,3 +49,40 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT
 > select host,user,plugin from user;
 
 
+
+
+
+## mysql 5.7之后的配置文件
+
+5.6之前可以配置在my.cnf  大致路径是 etc/ 或者etc/mysql下面
+
+`!includedir /etc/mysql/conf.d/`
+
+然后 5.7之后 多了一个conf.d 文件夹 可以配置文件放文件夹下 比如 vi mysqld.cnf
+
+```
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+skip-character-set-client-handshake=true
+tmp_table_size=512M
+max_heap_table_size=500M
+[mysql_upgrade]
+
+[mysqladmin]
+
+[mysqlbinlog]
+
+[mysqlcheck]
+
+[mysqldump]
+
+[mysqlimport]
+
+[mysqlshow]
+
+[mysqlslap]
+
+```
+

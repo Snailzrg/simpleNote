@@ -8,11 +8,7 @@
 
 ## 镜像相关命令
 
-　　
-
 　　官方文档：[docs.docker.com/reference/](https://docs.docker.com/reference/)
-
-　　
 
 ### 查看镜像
 
@@ -43,10 +39,7 @@ hello-world         latest              bf756fb1ae65        7 months ago        
 
 ```bash
 docker search 镜像名称
-复制代码
 ```
-
-
 
 ![img](https://mrhelloworld.com/resources/articles/docker/image-20200812143211793.png)
 
@@ -62,39 +55,25 @@ docker search 镜像名称
 
 ### 拉取镜像
 
-　　
-
 　　拉取镜像就是从中央仓库下载镜像到本地。
 
 ```bash
 docker pull 镜像名称
-复制代码
 ```
-
-　　
 
 　　假如我要拉取 centos 镜像到本地，如果不声明 tag 镜像标签信息则默认拉取 latest 版本，也可以通过：[hub.docker.com/](https://hub.docker.com/) 搜索该镜像，查看支持的 tag 信息。
 
-
-
 ![img](https://mrhelloworld.com/resources/articles/docker/image-20200812153124156.png)
-
-
-
-　　
 
 　　通过查看 tag 信息，如果我们要下载 centos7 的镜像。
 
 ```bash
 docker pull centos:7
-复制代码
 ```
 
 　　
 
 ### 删除镜像
-
-　　
 
 　　按镜像 ID 删除镜像。
 
@@ -106,13 +85,10 @@ docker rmi 镜像ID 镜像ID 镜像ID
 复制代码
 ```
 
-　　
-
 　　`docker images -q` 可以查询到所有镜像的 ID，通过组合命令可以实现删除所有镜像的操作。
 
 ```bash
 docker rmi `docker images -q`
-复制代码
 ```
 
 > 注意：如果通过某个镜像创建了容器，则该镜像无法删除。
@@ -123,18 +99,13 @@ docker rmi `docker images -q`
 
 ## 容器相关命令
 
-　　
-
 ### 查看容器
-
-　　
 
 　　查看正在运行的容器。
 
 ```bash
 [root@localhost ~]# docker ps
 CONTAINER ID        IMAGE        COMMAND        CREATED        STATUS        PORTS        NAMES
-复制代码
 ```
 
 - `CONTAINER ID`：容器 ID
@@ -150,33 +121,24 @@ CONTAINER ID        IMAGE        COMMAND        CREATED        STATUS        POR
 　　查看停止的容器。
 
 ```bash
-docker ps -f status=exited
-复制代码
+docker ps -f status=exited　　
 ```
-
-　　
 
 　　查看所有容器（包括运行和停止）。
 
 ```bash
 docker ps -a
-复制代码
 ```
-
-　　
 
 　　查看最后一次运行的容器。
 
 ```bash
 docker ps -l
-复制代码
 ```
 
 　　
 
 ### 创建与启动容器
-
-　　
 
 ```bash
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
@@ -195,85 +157,62 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 #### 创建并进入容器
 
-　　
-
 　　下面这行命令的意思就是通过镜像 AA 创建一个容器 BB，运行容器并进入容器的 `/bin/bash`。
 
 ```bash
 docker run -it --name 容器名称 镜像名称:标签 /bin/bash
-复制代码
 ```
 
 > 注意：Docker 容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为是空闲状态，就会自动退出。
-
-　　
 
 **退出当前容器**
 
 ```bash
 exit
-复制代码
 ```
-
-　　
 
 #### 守护式方式创建容器
 
-　　
-
 ```bash
 docker run -di --name 容器名称 镜像名称:标签
-复制代码
 ```
-
-　　
 
 **登录守护式容器方式**
 
 ```bash
 docker exec -it 容器名称|容器ID /bin/bash
-复制代码
 ```
 
-　　
+
 
 ### 停止与启动容器
-
-　　
 
 ```bash
 # 停止容器
 docker stop 容器名称|容器ID
 # 启动容器
 docker start 容器名称|容器ID
-复制代码
 ```
 
-　　
 
-### 文件拷贝
 
-　　
+### 文件拷贝　　
 
 　　如果我们需要将文件拷贝到容器内可以使用 cp 命令。
 
 ```bash
 docker cp 需要拷贝的文件或目录 容器名称:容器目录
-复制代码
 ```
 
 　　也可以将文件从容器内拷贝出来。
 
 ```bash
 docker cp 容器名称:容器目录 需要拷贝的文件或目录
-复制代码
 ```
 
-　　
 
-### 目录挂载（容器数据卷操作）
 
-　　
+### 目录挂载（容器数据卷操作）　
 
 　　我们可以在创建容器的时候，将宿主机的目录与容器内的目录进行映射，这样我们就可以通过修改宿主机某个目录的文件从而去影响容器，而且这个操作是双向绑定的，也就是说容器内的操作也会影响到宿主机，实现备份功能。
 
@@ -289,7 +228,6 @@ docker cp 容器名称:容器目录 需要拷贝的文件或目录
 docker run -di -v /mydata/docker_centos/data:/usr/local/data --name centos7-01 centos:7
 # 多目录挂载
 docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目录2 镜像名
-复制代码
 ```
 
 > 目录挂载操作可能会出现权限不足的提示。这是因为 CentOS7 中的安全模块 SELinux 把权限禁掉了，在 docker run 时通过 `--privileged=true` 给该容器加权限来解决挂载的目录没有权限的问题。
@@ -298,8 +236,6 @@ docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目
 
 #### 匿名挂载
 
-　　
-
 　　匿名挂载只需要写容器目录即可，容器外对应的目录会在 `/var/lib/docker/volume` 中生成。
 
 ```shell
@@ -307,10 +243,7 @@ docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目
 docker run -di -v /usr/local/data --name centos7-02 centos:7
 # 查看 volume 数据卷信息
 docker volume ls
-复制代码
 ```
-
-
 
 ![img](https://mrhelloworld.com/resources/articles/docker/image-20200813201808718.png)
 
@@ -320,8 +253,6 @@ docker volume ls
 
 #### 具名挂载
 
-　　
-
 　　具名挂载就是给数据卷起了个名字，容器外对应的目录会在 `/var/lib/docker/volume` 中生成。
 
 ```shell
@@ -329,10 +260,7 @@ docker volume ls
 docker run -di -v docker_centos_data:/usr/local/data --name centos7-03 centos:7
 # 查看 volume 数据卷信息
 docker volume ls
-复制代码
 ```
-
-
 
 ![img](https://mrhelloworld.com/resources/articles/docker/image-20200813202118346.png)
 
@@ -342,22 +270,17 @@ docker volume ls
 
 #### 指定目录挂载
 
-　　
-
 　　一开始给大家讲解的方式就属于指定目录挂载，这种方式的挂载不会在 `/var/lib/docker/volume` 目录生成内容。
 
 ```shell
 docker run -di -v /mydata/docker_centos/data:/usr/local/data --name centos7-01 centos:7
 # 多目录挂载
 docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目录2 镜像名
-复制代码
 ```
 
 　　
 
 #### 查看目录挂载关系
-
-　　
 
 　　通过 `docker volume inspect 数据卷名称` 可以查看该数据卷对应宿主机的目录地址。
 
@@ -374,38 +297,26 @@ docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目
         "Scope": "local"
     }
 ]
-复制代码
 ```
 
-　　
-
 　　通过 `docker inspect 容器ID或名称` ，在返回的 JSON 节点中找到 `Mounts`，可以查看详细的数据挂载信息。
-
-
 
 ![img](https://mrhelloworld.com/resources/articles/docker/image-20200813203856160.png)
 
 
 
-　　
-
 #### 只读/读写
-
-　　
 
 ```shell
 # 只读。只能通过修改宿主机内容实现对容器的数据管理。
 docker run -it -v /宿主机目录:/容器目录:ro 镜像名
 # 读写，默认。宿主机和容器可以双向操作数据。
 docker run -it -v /宿主机目录:/容器目录:rw 镜像名
-复制代码
 ```
 
 　　
 
 #### volumes-from（继承）
-
-　　
 
 ```shell
 # 容器 centos7-01 指定目录挂载
@@ -413,34 +324,27 @@ docker run -di -v /mydata/docker_centos/data:/usr/local/data --name centos7-01 c
 # 容器 centos7-04 和 centos7-05 相当于继承 centos7-01 容器的挂载目录
 docker run -di --volumes-from centos7-01 --name centos7-04 centos:7
 docker run -di --volumes-from centos7-01 --name centos7-05 centos:7
-复制代码
 ```
 
 　　
 
 ### 查看容器 IP 地址
 
-　　
-
 　　我们可以通过以下命令查看容器的元信息。
 
 ```shell
 docker inspect 容器名称|容器ID
-复制代码
 ```
 
 　　也可以直接执行下面的命令直接输出 IP 地址。
 
 ```shell
 docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器名称|容器ID
-复制代码
 ```
 
 　　
 
 ### 删除容器
-
-　　
 
 ```shell
 # 删除指定容器

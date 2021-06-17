@@ -205,7 +205,6 @@ yum [options] [command] [package ...]
  所 有的游戏程序包就自动安装了。在这里Games and  Entertainment的名字必须用双引号选定，因为linux下面遇到空格会认为文件名结束了，因此必须告诉系统安装的程序包的名字是“Games and Entertainment”而不是“Games"。
 
 > 此外，还可以修改配置文件/etc/yum.conf选择安装源。可见yum进行配置程序有多方便了吧。更多详细的选项和命令，当然只要在命令提示行下面:man yum
->
 
 ## 三：一些问题
 
@@ -220,6 +219,16 @@ yum [options] [command] [package ...]
 ![image-20210120153645503](https://gitee.com/snailzrg/snail_img/raw/master/picgo_snail_img/image-20210120153645503.png)
 
 
+
+
+
+
+
+
+
+## vim 常见命令
+
+：set nu ---> 显示行号
 
 
 

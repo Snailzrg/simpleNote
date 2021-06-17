@@ -1,11 +1,5 @@
 # mysql中的时间类型
 Mysql中的date与datetime，以及如何向Mysql中插入“日期+时间”数据
-
-2016年02月26日 13:56:10 我是干勾鱼 阅读数：24124更多
-所属专栏： MYSQL常见问题解析
-版权声明：本文为博主原创文章，未经博主允许不得转载。	 https://blog.csdn.net/dongdong9223/article/details/50748073
-转载请注明出处：http://blog.csdn.net/dongdong9223/article/details/50748073 
-本文出自【我是干勾鱼的博客】
 我们知道，java中有date和datetime，mysql中也有date和datetime，这里我们来说说mysql中的date和datetime。
 
 1 mysql中的date和datetime
