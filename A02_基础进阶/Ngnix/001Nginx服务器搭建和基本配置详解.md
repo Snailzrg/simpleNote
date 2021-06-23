@@ -155,10 +155,13 @@ stub_status on
 开启状态显式，仅能用于 location 中：
 开启状态显式页面
 
+```javascript
+location /status {
+  ``stub_status on;
+  ``allow 172.16.0.0/16;
+  ``deny all;
+  ``}
 ```
-location /status {``stub_status on;``allow 172.16.0.0/16;``deny all;``}
-```
-
 
 rewrite <REGEX> <REPL> <FLAG>
 URL 重写，可以使用多种标记
@@ -173,26 +176,54 @@ rewrite ^/images/(.*\.jpg)$ /imgs/$1 break;
 
 一个 server 配置示例：
 
-```
-server {`` ``listen 80;`` ``server_name www.example.com;`` ``root /web/htdocs;` ` ``location / {`` ``index index.html index.htm;`` ``}` ` ``location /status {`` ``stub_status on;`` ``allow 10.0.0.0/8;`` ``deny all;`` ``access_log off;``}
+```javascript
+server {
+  `` ``listen 80;
+  `` ``server_name www.example.com;
+  `` ``root /web/htdocs;
+  
+  ` ` ``location / {
+    `` ``index index.html index.htm;
+    `` ``}
+  
+  ` ` ``location /status {
+    `` ``stub_status on;
+    `` ``allow 10.0.0.0/8;
+    `` ``deny all;
+    `` ``access_log off;
+    ``}
 ```
 
 **2.3 SSL 的配置**
 
 启用一个 SSL 虚拟主机
 
-```
-server {`` ``listen 443;`` ``server_name example.com;` ` ``root /apps/www;`` ``index index.html index.htm;` ` ``ssl on;`` ``ssl_certificate /etc/nginx/ssl/nginx.crt;`` ``ssl_certificate_key /etc/nginx/ssl/nginx.key;` `# ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;``# ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;``# ssl_prefer_server_ciphers on;` `}
+```javascript
+server {
+`` ``listen 443;
+`` ``server_name example.com;
+` ` ``root /apps/www;
+`` ``index index.html index.htm;
+  ` ` ``ssl on;
+  `` ``ssl_certificate /etc/nginx/ssl/nginx.crt;
+  `` ``ssl_certificate_key /etc/nginx/ssl/nginx.key;
+  ` `# ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ``# ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+  ``# ssl_prefer_server_ciphers on;
+  ` `}
 ```
 
 其中 ssl_certificate 表示 CA 文件，ssl_certificate_key 表示密钥文件。
 
 如果想把 http 请求强制转到 https，可以这样：
 
+```javascript
+server {
+``listen 80;
+``server_name example.me;
+``return 301 https://$server_name$request_uri;
+``}
 ```
-server {``listen 80;``server_name example.me;` `return 301 https://$server_name$request_uri;``}
-```
-
 
 **2.4 nginx 做负载均衡反向代理**
 
@@ -200,8 +231,11 @@ nginx 做反向代理时，后端主机有多台，可以使用 upstream 定义�
 
 例如：
 
-```
-upstream backend {`` ``server 172.16.0.1:80 weight=1 max-fails=3 fail_timeout=10;`` ``server 172.16.0.2:80 weight=1max-fails=3 fail_timeout=10;;``}
+```javascript
+upstream backend {
+`` ``server 172.16.0.1:80 weight=1 max-fails=3 fail_timeout=10;
+`` ``server 172.16.0.2:80 weight=1max-fails=3 fail_timeout=10;;
+``}
 ```
 
 
@@ -216,15 +250,23 @@ sticky：基于 cookie 进行会话绑定，nginx 会在客户端第一次访问
 
 例如，基于 cookie name 的调度：
 
-```
-upstream backend {`` ``server backend1.example.com;`` ``server backend2.example.com;` ` ``sticky cookie srv_id expires=1h domain=.example.com path=/;``}
+```javascript
+upstream backend {
+`` ``server backend1.example.com;
+`` ``server backend2.example.com;
+` ` ``sticky cookie srv_id expires=1h domain=.example.com path=/;
+``}
 ```
 
 
 使用此主机组进行反向代理：
 
-```
-location / {`` ``proxy_pass http://backend;`` ``proxy_set_header Host $host;`` ``proxy_set_haeder X-Forwared-For $proxy_add_x_forwarded_for;``}
+```javascript
+location / {
+`` ``proxy_pass http://backend;
+`` ``proxy_set_header Host $host;
+`` ``proxy_set_haeder X-Forwared-For $proxy_add_x_forwarded_for;
+``}
 ```
 
 
@@ -253,15 +295,18 @@ proxy_cache_valid [code ...] time 指定不同响应码的内容的缓存时间
 
 如：
 
-```
-proxy_cache_valid 200 302 10m;``proxy_cache_valid 404 1m;``proxy_cache_valid any 1m;
+```javascript
+  proxy_cache_valid 200 302 10m;
+``proxy_cache_valid 404 1m;
+``proxy_cache_valid any 1m;
 ```
 
 
 proxy_cache_method METHOD 定义哪些方法的请求结果可以被缓存，如：
 
-```
-proxy_cache_method GET;``proxy_cache_method HEAD;
+```javascript
+  proxy_cache_method GET;
+``proxy_cache_method HEAD;
 ```
 
 
@@ -271,8 +316,14 @@ proxy_cache NAME 指定使用预先定义的缓存空间用于缓存
 
 使用 fastCGI 时，设置代理的方法同 porxy_pass 类似，同时还可以使用 fastCGI 缓存，设置的方法也和 proxy_cache 类似。
 
-```
-location ~ \.php$ {`` ``root  /web/htdocs;`` ``fastcgi_pass 127.0.0.1:9000;`` ``fastcgi_index index.php;`` ``fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;`` ``include fastcgi_params;``}
+```javascript
+location ~ \.php$ {
+`` ``root  /web/htdocs;
+`` ``fastcgi_pass 127.0.0.1:9000;
+`` ``fastcgi_index index.php;
+`` ``fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+`` ``include fastcgi_params;
+``}
 ```
 
 

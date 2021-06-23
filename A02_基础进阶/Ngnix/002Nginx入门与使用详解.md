@@ -16,7 +16,8 @@ Nginx可以完成、负载均衡、动静分离
 将动态资源和静态资源由不同的服务器解析，降低只使用单个服务器时的压力
 
 
-二、Nginx安装 (Linux)
+
+## 二、Nginx安装 (Linux)
 将pcre依赖文件上传到Linux的/usr/src目录下
 
 
@@ -34,7 +35,7 @@ Nginx可以完成、负载均衡、动静分离
 
 安装openssl、zlib、gcc依赖
 yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel
-1
+- 1
 将Nginx安装包上传到Linux的/usr/src目录
 
 
@@ -56,11 +57,12 @@ yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel
 
 启动Nginx，cd /usr/local/nginx/sbin，后执行./nginx
 
-
 浏览器地址栏输入 http://[Linux的IP地址]:80 (Nginx默认使用80端口)
 
 
-三、Nginx常用指令
+
+### 三、Nginx常用指令
+
 1. 启动Nginx
 先cd /usr/local/nginx/sbin，后./nginx，或者直接 /usr/local/nginx/sbin/nginx
 
@@ -79,15 +81,18 @@ Nginx的配置文件都放在/usr/local/nginx/conf/目录下
 
 将nginx.conf文件打开后的内容：
 
-# 第一部分：全局块
+第一部分：全局块
+
 worker_processes  1;  # worker进程数，值越大，支持的并发数量越大，尽量与cpu数相同
 
-# 第二部分：events块
+第二部分：events块
+
 `events {`
     `worker_connections  1024;  # 每个worker进程支持的最大连接数默认为1024`
 `}`
 
-# 第三部分：http块
+第三部分：http块 
+
 	http {
 		# http全局块
 	    include       mime.types;
@@ -171,7 +176,8 @@ worker_processes  1;  # worker进程数，值越大，支持的并发数量越�
 (3) 在Nginx的配置文件中进行负载均衡配置，vim /usr/local/nginx/conf/nginx.conf
 
 upstream myserver {
-# 列出所要负载均衡的tomcat服务器
+列出所要负载均衡的tomcat服务器
+
     server 192.168.206.128:8080;
     server 192.168.206.128:8081;
 }

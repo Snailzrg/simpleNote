@@ -824,7 +824,7 @@ protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable M
 #### 5.2、解析这个参数的值
 
 ```
-调用各自 HandlerMethodArgumentResolver 的 resolveArgument 方法即可
+  调用各自 HandlerMethodArgumentResolver 的 resolveArgument 方法即可
 ```
 
 #### 5.3、自定义类型参数 封装POJO
@@ -849,7 +849,7 @@ public static boolean isSimpleValueType(Class<?> type) {
     }
 @Override
     @Nullable
-    public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
+      public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
         Assert.state(mavContainer != null, "ModelAttributeMethodProcessor requires ModelAndViewContainer");
@@ -1149,8 +1149,6 @@ RequestResponseBodyMethodProcessor
 
 ### ![image.png](https://cdn.nlark.com/yuque/0/2020/png/1354552/1605151728659-68c8ce8a-1b2b-4ab0-b86d-c3a875184672.png)
 
-
-
 - 1、返回值处理器判断是否支持这种类型返回值 supportsReturnType
 - 2、返回值处理器调用 handleReturnValue 进行处理
 - 3、RequestResponseBodyMethodProcessor 可以处理返回值标了@ResponseBody 注解的。
@@ -1163,14 +1161,6 @@ RequestResponseBodyMethodProcessor
 
 - - - - 1、得到MappingJackson2HttpMessageConverter可以将对象写为json
       - 2、利用MappingJackson2HttpMessageConverter将对象转为json再写出去。
-
-
-
-
-
-
-
-
 
 
 

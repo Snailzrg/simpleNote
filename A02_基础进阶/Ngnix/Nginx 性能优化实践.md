@@ -27,11 +27,11 @@
 ![图片](https://images-cdn.shimo.im/i8oQuJikm9EREsxz/image.png!thumbnail)
 
 **反向代理与正向代理的区别**
-|    | **正向代理**   | **反向代理**   | 
+|    | **正向代理**   | **反向代理**   |
 |:----|:----|:----|
-| 代理服务器位置   | 客户端与服务都能连接的们位置   | 目标服务器内部   | 
-| 主要作用   | 屏蔽客户端IP、集中式缓存、解决客户端不能直连服务端的问题。   | 屏蔽服务端内部实现、负载均衡、缓存。   | 
-| 应用场景   | 爬虫、翻墙、maven 的nexus 服务   | Nginx 、Apache负载均衡应用   | 
+| 代理服务器位置   | 客户端与服务都能连接的们位置   | 目标服务器内部   |
+| 主要作用   | 屏蔽客户端IP、集中式缓存、解决客户端不能直连服务端的问题。   | 屏蔽服务端内部实现、负载均衡、缓存。   |
+| 应用场景   | 爬虫、翻墙、maven 的nexus 服务   | Nginx 、Apache负载均衡应用   |
 
 **Nginx代理基本配置**
 Nginx 代理只需要配置 location 中配置proxy_pass 属性即可。其指向代理的服务器地址。
@@ -168,16 +168,16 @@ proxy_cache_valid 200 304 12h;
 - [ ] 查看缓存目录生成
 
 缓存参数详细说明	
-| 父元素   | 名称   | 描述   | 
+| 父元素   | 名称   | 描述   |
 |:----|:----|:----|
-| http   | proxy_cache_path   | 指定缓存区的根路径   | 
-|    | levels   | 缓存目录层级最高三层，每层1~2个字符表示。如1:1:2 表示三层。   | 
-|    | keys_zone   | 缓存块名称 及内存块大小。如 cache_item:500m 。表示声明一个名为cache_item 大小为500m。超出大小后最早的数据将会被清除。   | 
-|    | inactive   | 最长闲置时间 如:10d 如果一个数据被闲置10天将会被清除   | 
-|    | max_size   | 缓存区硬盘最大值。超出闲置数据将会被清除   | 
-| location   | proxy_cache   | 指定缓存区，对应keys_zone 中设置的值   | 
-|    | proxy_cache_key   | 通过参数拼装缓存key 如：$host$uri$is_args$args 则会以全路径md5值做做为Key   | 
-|    | proxy_cache_valid   | 为不同的状态码设置缓存有效期   | 
+| http   | proxy_cache_path   | 指定缓存区的根路径   |
+|    | levels   | 缓存目录层级最高三层，每层1~2个字符表示。如1:1:2 表示三层。   |
+|    | keys_zone   | 缓存块名称 及内存块大小。如 cache_item:500m 。表示声明一个名为cache_item 大小为500m。超出大小后最早的数据将会被清除。   |
+|    | inactive   | 最长闲置时间 如:10d 如果一个数据被闲置10天将会被清除   |
+|    | max_size   | 缓存区硬盘最大值。超出闲置数据将会被清除   |
+| location   | proxy_cache   | 指定缓存区，对应keys_zone 中设置的值   |
+|    | proxy_cache_key   | 通过参数拼装缓存key 如：$host$uri$is_args$args 则会以全路径md5值做做为Key   |
+|    | proxy_cache_valid   | 为不同的状态码设置缓存有效期   |
 
 
 ### **3.缓存的清除：**
@@ -259,7 +259,6 @@ accept_mutex是Nginx的负载均衡锁，当某一个worker进程建立的连接
 语法：accept_mutex_delay Nms; 
 默认：accept_mutex_delay 500ms; 
 在使用accept锁后，同一时间只有一个worker进程能够取到accept锁。这个accept锁不是堵塞锁，如果取不到会立刻返回。如果只有一个worker进程试图取锁而没有取到，他至少要等待accept_mutex_delay定义的时间才能再次试图取锁。
-
 
 
 

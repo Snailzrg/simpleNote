@@ -84,3 +84,26 @@ Zookeeper维护一个类似文件系统的数据结构
 
 ​     终于了解完我们能用zookeeper做什么了，可是作为一个程序员，我们总是想狂热了解zookeeper是如何做到这一点的，单点维护一个文件系统没有什么难度，可是如果是一个集群维护一个文件系统保持数据的一致性就非常困难了。
 
+
+
+
+
+### docker 使用zookeeper
+
+##  3、使用 docker run 启动
+
+```bash
+# docker run 新建并启动容器
+docker run --name zookeeper2181 -it -p 2181:2181 -p 2888:2888 -p 3888:3888 zookeeper
+
+# 2181 端口号时 zookeeper client 端口
+# 2888端口号是zookeeper服务之间通信的端口
+# 3888端口是zookeeper与其他应用程序通信的端口
+
+
+# 使用 ZK 命令行客户端连接 ZK
+docker run -it --rm --link zookeeper2181:zookeeper zookeeper zkCli.sh -server zookeeper
+# 启动一个 zookeeper 镜像, 并运行这个镜像内的 zkCli.sh 命令, 命令参数是 "-server zookeeper"
+# 将我们先前启动的名为 zookeeper2181 的容器连接(link) 到我们新建的这个容器上, 并将其主机名命名为 zookeeper
+# 当我们执行了这个命令后, 就可以像正常使用 ZK 命令行客户端一样操作 ZK 服务了.
+```

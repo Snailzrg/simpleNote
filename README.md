@@ -87,10 +87,51 @@ Markdown 支持有序列表和无序列表。
 无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记： 
 
  有序列表使用数字并加上 . 号来表示，如：
- 
+
  列表嵌套
- 
+
  列表嵌套只需在子列表中的选项添加四个空格即可：
- 
+
  区块是可以嵌套 >
- 
+
+```mermaid
+classDiagram
+Animal <|-- Duck
+Animal <|-- Fish
+Animal <|-- Zebra
+Animal : +int age
+Animal : +String gender
+Animal: +isMammal()
+Animal: +mate()
+class Duck{
++String beakColor
++swim()
++quack()
+}
+class Fish{
+-int sizeInFeet
+-canEat()
+}
+class Zebra{
++bool is_wild
++run()
+}
+```
+
+```mermaid
+stateDiagram-v2
+[*] --> Still
+Still --> [*]
+
+Still --> Moving
+Moving --> Still
+Moving --> Crash
+Crash --> [*]
+```
+
+
+```mermaid
+pie title Pets adopted by volunteers
+"Dogs" : 386
+"Cats" : 85
+"Rats" : 15
